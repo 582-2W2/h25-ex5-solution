@@ -1,0 +1,291 @@
+/* Normalisation supplémentaire 
+=============================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Mise en page de base
+=============================================== */
+html {
+    height: 100vh;
+    scroll-behavior: smooth;
+    font-family: 'Asap', sans-serif;
+    /*Ajustement de la taille des polices à la racine du document*/
+    font-size: clamp(16px, 0.5rem + 0.5vw, 24px);
+}
+
+body {
+    color: #072706;
+    overflow-y: scroll;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Barre du haut (logo/titre et boutons de contrôle de la navigation principale)
+=============================================== */
+.barre-haut {
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+.icone-logo {
+    font-size: 4rem;
+    vertical-align: middle;
+    padding-right: 0.5rem;
+    rotate: -20deg;
+}
+
+/* "Boutons" de contrôle du menu adaptatif */
+.btn-nav-principale {
+    cursor: pointer;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 300ms, color 300ms;
+}
+
+.btn-nav-principale:hover {
+    background-color: #072706;
+    color: #c8dfc7;
+}
+
+
+/* Taille des icônes */
+.icone-burger,
+.icone-fermer {
+    font-size: 2.5rem;
+}
+
+/* Barre de navigation principale
+=============================================== */
+/* Le menu de navigation adaptatif */
+.nav-principale {
+    background-color: #236F21;
+    color: white;
+    font-size: 1.5rem;
+    
+    /* [À compléter : étape 2a] */
+    /* Position fixe, en haut et à droite du viewport avec les distances que
+    vous jugerez adéquates */
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    /* [À compléter : étape 2b] */
+    /* Ordre dans les éléments "empilés" : il doit être derrière la barre du 
+    logo mais devant le reste de la page */
+    z-index: 9;
+    
+    /* [À compléter : étape 2c] */
+    /* Dimension du menu : comme vous voyez dans la démo ! */
+    width: 80vw;
+    height: 100vh;
+    
+    /* [À compléter : étape 2d] */
+    /* Mode d'affichage du menu : sur mobile, l'affichage des éléments de menu 
+    est en colonne centré verticalement et aligné à droite horizontalement */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    
+    /* [À compléter : étape 2e] */
+    /* La barre de navigation est déplacée vers la droite */
+    translate: 100%;
+
+    /* [À compléter : étape 2f] */
+    /* Effet de transition  pour cette translation */
+    transition: translate 300ms;
+    
+    /* Remplissage */
+    padding-right: 1rem;
+
+    /* Gouttière entre les lignes (items de menu) */
+    row-gap: 2vh;
+}
+
+/* Les items de menu */
+.nav-principale a {
+    /* display: inline-block; */
+    border: transparent 2px solid;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    color: #c8dfc7;
+    transition: border 300ms, color 300ms;
+}
+
+/* Effets de survol des items de menu */
+.nav-principale a:hover {
+    border-color: #c8dfc7;
+    /* Remarquez l'utilisation de la valeur 'unset' : faites une recherche pour 
+    apprendre sa signification (Google : 'mdn css unset' ;-))  */
+    color: unset;
+}
+
+/* États des différents éléments de contrôle de l'affichage du menu adaptatif
+==================================================================== */
+.icone-fermer {
+    /* [À compléter : étape 3a] */
+    /* Ajoutez une propriété de style pour retirer de l'affichage le bouton de 
+    fermeture du menu */
+    display: none;
+}
+
+/* [À compléter : étape 3b] */
+/* Ajoutez une règle de style pour dévoiler le menu lorsque la case à cocher est 
+cochée. */
+#cc-nav-principale:checked ~ .nav-principale {
+    /* On redéplace le menu en vue et on le met à une échelle plus grande */
+    translate: 0;
+}
+
+/* [À compléter : étape 3c] */
+/* Ajoutez une règle de style pour retirer l'icône du bouton burger d'ouverture 
+du menu lorsque la case à cocher est cochée */
+#cc-nav-principale:checked ~ header .btn-nav-principale > .icone-burger {
+    display: none;
+}
+
+/* [À compléter : étape 3d] */
+/* Ajoutez une règle de style pour rétablir l'affichage de l'icône du bouton 
+burger de fermeture du menu lorsque la case à cocher est cochée */
+#cc-nav-principale:checked ~ header .btn-nav-principale > .icone-fermer {
+    display: block;
+}
+
+/* [À compléter : étape 3e] */
+/* Ajoutez une règle de style pour modifier la couleur du texte dans la barre du 
+haut (celle qui contient le logo, etc.) lorsque la case à cocher est cochée. */
+#cc-nav-principale:checked ~ .barre-haut {
+    color: #c8dfc7;
+}
+
+/* [À compléter : étape 3f] */
+/* Ajoutez une règle de style pour retirez la case à cocher associée avec le 
+menu adaptatif de l'affichage */
+#cc-nav-principale {
+    display: none;
+}
+
+/* Contenu principal
+=============================================== */
+/* Les sections du contenu principal */
+main > section {
+    margin-top: 1rem;
+    padding: 1rem;
+    /* Les sections sont un peu transparentes par défaut */
+    opacity: 0.7;
+    transition: opacity 1s;
+}
+
+/* La section du contenu principal qui est la cible du fragment d'URL (par 
+exemple #section2) */
+main > section:target {
+    opacity: 1;
+    background-color: #e1f7e0;
+}
+
+/* Titres des sections du contenu principal */
+main > section h2 {
+    margin: 0.5rem 0;
+    padding-bottom: 0.25rem;
+    border-bottom: 2px dashed green;
+}
+
+/* Paragraphe dans les sections */
+main > section p {
+    margin-top: 1rem;
+}
+
+/* Bouton flottant 'retour vers le haut de page' */
+.btn-retour-haut {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    background-color: #d5d165;
+    border-radius: 50%;
+    box-shadow: 3px 3px 10px 1px rgba(23, 85, 23, 0.5);
+}
+
+@media screen and (orientation: landscape) {
+    .nav-principale {
+        justify-content: flex-end;
+        padding-bottom: 5vh;
+    }
+}
+
+/* Requête média pour écrans plus grands (768px et +)
+===================================================== */
+@media screen and (min-width:768px) {
+    .barre-haut {
+        /* [À compléter : étape 4a] */
+        /* Le contenu de la barre du haut est centré horizontalement */
+        justify-content: center;
+    }
+
+    .btn-nav-principale {
+        /* [À compléter : étape 4b] */
+        /* Le bouton de contrôle du menu mobile est retiré de l'affichage */
+        display: none;
+    }
+
+    .nav-principale {
+        /* [À compléter : étape 4c] */
+        /* La barre de menu est "collée" au haut du viewport sur défilement */
+        position: sticky;
+        top: 0;
+
+        /* [À compléter : étape 4d] */
+        /* Largeur et hauteur reprennent leurs valeurs par défaut */
+        width: auto;
+        height: auto;
+
+        /* [À compléter : étape 4e] */
+        /* Les éléments du menu sont affichés en rangée et centrés horizontalement */
+        flex-direction: row;
+        justify-content: center;
+
+        /* [À compléter : étape 4f] */
+        /* Le déplacement par translation est annulé */
+        translate: 0;
+        
+        /* Gouttières de 1rem entre les colonnes */
+        column-gap: 1rem;
+        
+        /* Valeur de remplissage ajustée pour menu grand écran */
+        padding: 0.5rem;
+
+        /* Taille de police initiale */
+        font-size: initial;
+
+        /* Pas de transition lorsqu'on redimensionne la fenêtre du navigateur */
+        transition: none;
+    }
+
+    /* Plus de padding sur plus grands écrans */
+    main > section {
+        padding: 1rem 4rem;
+    }
+
+    /* Ajutement requis pour un cas limite : l'utilisateur réduit la taille du 
+    viewport, clique le bouton burger, puis redimensionne le navigateur. */
+    #cc-nav-principale:checked ~ .barre-haut {
+        color: #072706;
+    }
+}
